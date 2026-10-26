@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply font-body antialiased;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    h1, h2, h3, h4, h5 {
+        @apply font-display;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@layer components {
+    /* Price tag ribbon from the L-DCH reference design. */
+    .tag {
+        @apply relative bg-forest-700 text-harvest-100;
+    }
+
+    .tag::after {
+        content: "";
+        position: absolute;
+        left: -8px;
+        top: 0;
+        bottom: 0;
+        width: 8px;
+        background: inherit;
+        clip-path: polygon(100% 0, 0 50%, 100% 100%);
+    }
+
+    .card-hover {
+        transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 34px -12px rgba(33, 59, 36, 0.28);
+    }
+
+    .scallop {
+        -webkit-mask-image: radial-gradient(circle at 10px 0, transparent 9px, black 10px);
+        -webkit-mask-size: 20px 20px;
+        -webkit-mask-repeat: repeat-x;
+        -webkit-mask-position: bottom;
+        mask-image: radial-gradient(circle at 10px 0, transparent 9px, black 10px);
+        mask-size: 20px 20px;
+        mask-repeat: repeat-x;
+        mask-position: bottom;
+    }
+
+    .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.in {
+        opacity: 1;
+        transform: none;
+    }
+
+    .form-label {
+        @apply block text-xs font-bold text-forest-500;
+    }
+
+    .form-input {
+        @apply mt-1 w-full rounded-xl border border-forest-200 bg-white px-4 py-2.5 text-sm text-forest-700 placeholder:text-forest-300 focus:border-harvest-300 focus:outline-none focus:ring-2 focus:ring-harvest-300;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-full bg-harvest-500 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-harvest-500/25 transition hover:bg-harvest-600;
+    }
+
+    .btn-dark {
+        @apply inline-flex items-center justify-center gap-2 rounded-full bg-forest-700 px-5 py-2.5 text-sm font-bold text-cream transition hover:bg-forest-600;
+    }
+
+    .btn-outline {
+        @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-forest-700 px-5 py-2 text-sm font-bold text-forest-700 transition hover:bg-forest-700 hover:text-white;
+    }
+
+    .btn-danger {
+        @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-clay-400 px-5 py-2 text-sm font-bold text-clay-600 transition hover:bg-clay-50;
+    }
+
+    .card {
+        @apply rounded-2xl border border-forest-100 bg-white;
+    }
+
+    .chip {
+        @apply whitespace-nowrap rounded-full border border-forest-200 bg-white px-4 py-2 text-sm font-bold text-forest-600 transition;
+    }
+
+    .chip-active {
+        @apply border-forest-700 bg-forest-700 text-cream;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #F5B463;
+    border-radius: 4px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+}
